@@ -2,6 +2,7 @@
 Deploy Harbor locally using KIND
 
 Harbor Architecture:
+
 <img src="pictures/harbor-architecture.png?raw=true" width="800">
 
 ```bash
