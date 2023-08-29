@@ -123,3 +123,10 @@ hello-service                        LoadBalancer   10.96.95.92     172.18.0.101
 $ curl 172.18.0.101:5000
 Hello, Kube!
 ```
+Clean env:
+``
+make cluster-delete
+```
+
+Ref: 
+- https://github.com/jpb111/kubernetes-k0s-ansible-harbor
