@@ -15,15 +15,18 @@ $ cat /etc/hosts|tail -n2
 $ make install
 ```
 Open Browser https://core.harbor.domain and create `python` project 
+
 <img src="pictures/harbor-create-project.png?raw=true" width="1000">
 
 Setup image vulnarability scanning for the project
+
 <img src="pictures/harbor-project-python-hello-configure-scan.png?raw=true" width="1000">
 
-Download registry ca.crt 
+Download `python` project REGISTRY CERTIFICATE (ca.crt) 
+
 <img src="pictures/harbor-project-python-registry-certificate-download.png?raw=true" width="1000">
 
-Setup docker host 
+Setup laptop docker daemon (docker host): 
 ```
 $ cat /etc/docker/daemon.json
 {
@@ -31,7 +34,7 @@ $ cat /etc/docker/daemon.json
 }
 $ sudo systemctl restart docker
 ```
-Create docker image and push to harbor docker registry
+Create docker image and push to Harbor docker registry
 ```
 $ cd python-docker-hello-kube
 $ docker build . -t core.harbor.domain/python/hello:1.0
@@ -58,13 +61,14 @@ done.
 root@harbor-control-plane:/# echo "172.18.0.100 core.harbor.domain" >> /etc/hosts
 root@harbor-control-plane:/# systemctl restart containerd
 ```
-To Pull the image from the private registry, first, we need the create a secret containing the private registry credential. Create a secret object with docker-registry type.
+
+Note: To Pull the image from the private registry, first, we need the create a secret containing the private registry credential. Create a secret object with docker-registry type.
 
 ```
 $ kubectl create secret docker-registry harbor --docker-server=core.harbor.domain --docker-username=admin --docker-password=Harbor12345 --docker-email=root@testlab.local
 secret/harbor created
 ```
-Deploy app:
+Deploy python app:
 ```
 $ cat deployment.yml 
 
