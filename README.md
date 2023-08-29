@@ -5,6 +5,7 @@ Harbor Architecture:
 
 <img src="pictures/harbor-architecture.png?raw=true" width="800">
 
+KinD & Harbor setup
 ```bash
 $ make cluster
 $ make add-host
