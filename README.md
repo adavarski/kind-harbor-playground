@@ -1,6 +1,9 @@
 # ⚓ kind harbor
 Deploy Harbor locally using KIND
 
+Harbor Architecture:
+<img src="pictures/harbor-architecture.png?raw=true" width="1000">
+
 ```bash
 $ make cluster
 $ make add-host
