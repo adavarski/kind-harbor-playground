@@ -2,7 +2,7 @@
 
 Harbor Architecture:
 
-<img src="pictures/harbor-architecture.png?raw=true" width="800">
+<img src="pictures/Harbor-Architecture.png?raw=true" width="800">
 
 Installing KinD & Harbor on Kubernetes (KinD):
 
