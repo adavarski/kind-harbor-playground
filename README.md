@@ -124,7 +124,7 @@ $ curl 172.18.0.101:5000
 Hello, Kube!
 ```
 Clean env:
-``
+```
 make cluster-delete
 ```
 
