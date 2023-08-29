@@ -1,0 +1,18 @@
+expose:
+  type: ingress
+  ingress:
+    hosts:
+      core: core.harbor.domain
+    controller: k8s.io/ingress-nginx
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      kubernetes.io/ingress.class: nginx
+    notary:
+      annotations: {}
+    harbor:
+      annotations: {}
+
+harborAdminPassword: "Harbor12345"
