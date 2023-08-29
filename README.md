@@ -4,7 +4,8 @@ Harbor Architecture:
 
 <img src="pictures/harbor-architecture.png?raw=true" width="800">
 
-KinD & Harbor setup
+Installing KinD & Harbor on Kubernetes (KinD):
+
 ```bash
 $ make cluster
 $ make add-host
