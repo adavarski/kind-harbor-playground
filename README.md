@@ -15,15 +15,15 @@ $ cat /etc/hosts|tail -n2
 172.18.0.100	core.harbor.domain
 $ make install
 ```
-Open Browser https://core.harbor.domain and create `python` project 
+Open Browser https://core.harbor.domain and create `python` project:
 
 <img src="pictures/harbor-create-project.png?raw=true" width="1000">
 
-Setup image vulnarability scanning for the project
+Setup image vulnarability scanning for the project:
 
 <img src="pictures/harbor-project-python-hello-configure-scan.png?raw=true" width="1000">
 
-Download `python` project REGISTRY CERTIFICATE (ca.crt) 
+Download `python` project REGISTRY CERTIFICATE locally (ca.crt file):
 
 <img src="pictures/harbor-project-python-registry-certificate-download.png?raw=true" width="1000">
 
@@ -35,14 +35,14 @@ $ cat /etc/docker/daemon.json
 }
 $ sudo systemctl restart docker
 ```
-Create docker image and push to Harbor docker registry
+Create docker image and push to Harbor docker registry:
 ```
 $ cd python-docker-hello-kube
 $ docker build . -t core.harbor.domain/python/hello:1.0
-$ docker login core.harbor.domain
+$ docker login core.harbor.domain (admin:Harbor12345)
 $ docker push core.harbor.domain/python/hello:1.0
 ```
-Setup kind (ca.crt & /etc/hosts)
+Setup KinD (ca.crt previously downloaded & /etc/hosts)
 ```
 $ docker ps -a
 CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                       NAMES
@@ -109,6 +109,7 @@ spec:
         - containerPort: 5000
       imagePullSecrets:
         - name: harbor
+
 $ kubectl apply -f deployment.yml 
 service/hello-service created
 deployment.apps/hello-deployment created
