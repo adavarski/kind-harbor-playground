@@ -130,3 +130,4 @@ make cluster-delete
 
 Ref: 
 - https://github.com/jpb111/kubernetes-k0s-ansible-harbor
+- https://ruzickap.github.io/k8s-harbor/part-06/#add-project
