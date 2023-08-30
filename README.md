@@ -257,6 +257,9 @@ $ helm push --ca-file ./ca.crt hello-kube-0.1.0.tgz oci://core.harbor.domain/pyt
 Pushed: core.harbor.domain/python/hello/hello-kube:0.1.0
 Digest: sha256:e92385cc2daff9a0299630a29bb28a2710b1a796a5d1849b00ab62f1aa78400c
 ```
+
+<img src="pictures/harbor-OCI-chart-hello-kube.png?raw=true" width="1000">
+
 Pull and Install Helm Chart from OCI registry:
 
 ```
