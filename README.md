@@ -14,6 +14,17 @@ $ cat /etc/hosts|tail -n2
 # harbor
 172.18.0.100	core.harbor.domain
 $ make install
+
+$ kubectl get po |grep harb
+harbor-core-7bdb5c6655-xgn74                1/1     Running   1 (11h ago)   11h
+harbor-database-0                           1/1     Running   0             11h
+harbor-jobservice-c6b95f6d8-jddwg           1/1     Running   3 (11h ago)   11h
+harbor-notary-server-f4dbc86fd-pm5wm        1/1     Running   2 (11h ago)   11h
+harbor-notary-signer-5cfc9dcbf4-pt7f4       1/1     Running   2 (11h ago)   11h
+harbor-portal-6d694b876b-vcbwj              1/1     Running   0             11h
+harbor-redis-0                              1/1     Running   0             11h
+harbor-registry-64b7c69575-c55zf            2/2     Running   0             11h
+harbor-trivy-0                              1/1     Running   0             11
 ```
 Open Browser https://core.harbor.domain and create `python` project:
 
