@@ -53,6 +53,12 @@ $ docker build . -t core.harbor.domain/python/hello:1.0
 $ docker login core.harbor.domain (admin:Harbor12345)
 $ docker push core.harbor.domain/python/hello:1.0
 ```
+
+Check Trivy culnarability scan (1 High):
+
+<img src="pictures/harbor-python-helo-scan-vulnaribilities.png?raw=true" width="1000">
+
+
 ### Setup KinD (ca.crt previously downloaded & /etc/hosts)
 ```
 $ docker ps -a
