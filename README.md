@@ -261,7 +261,9 @@ $ curl 172.18.0.102:5000
 $ helm delete hello-kube
 release "hello-kube" uninstalled
 
-Note: This is pulling to tgz file to your current directory. Unlike with the common approach where you would first add a repo and the pull from it in order to be able to install a Chart you can do it all in one go with an OCI registry:
+Note: This is pulling to tgz file to your current directory.
+Unlike with the common approach where you would first add a repo and the pull from it in order to be able to install a Chart
+you can do it all in one go with an OCI registry:
 
 $ helm install hello-kube --ca-file ./ca.crt oci://core.harbor.domain/python/hello/hello-kube --version 0.1.0
 Pulled: core.harbor.domain/python/hello/hello-kube:0.1.0
