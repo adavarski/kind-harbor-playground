@@ -237,6 +237,12 @@ Successfully packaged chart and saved it to: /tmp/kind-harbor-playground/hello-k
 ```
 Push Helm Chart to OCI registry:
 ```
+Before pulling or pushing Helm charts with the OCI-compatible registry of Harbor, Harbor should be logged with helm registry login command.
+
+$ helm registry login -u admin --ca-file ./ca.crt https://core.harbor.domain
+Password: 
+Login Succeeded
+
 $ helm push --ca-file ./ca.crt hello-kube-0.1.0.tgz oci://core.harbor.domain/python/hello
 Pushed: core.harbor.domain/python/hello/hello-kube:0.1.0
 Digest: sha256:e92385cc2daff9a0299630a29bb28a2710b1a796a5d1849b00ab62f1aa78400c
