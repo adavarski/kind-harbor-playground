@@ -54,7 +54,7 @@ $ docker login core.harbor.domain (admin:Harbor12345)
 $ docker push core.harbor.domain/python/hello:1.0
 ```
 
-Check Trivy culnarability scan (1 High):
+Check Trivy vulnarability scan (1 High):
 
 <img src="pictures/harbor-python-helo-scan-vulnaribilities.png?raw=true" width="1000">
 
