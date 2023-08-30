@@ -236,6 +236,16 @@ Successfully packaged chart and saved it to: /tmp/kind-harbor-playground/hello-k
 
 ```
 Push Helm Chart to OCI registry:
+
+There are three options how helm charts can be pushed to Harbor
+
+- 1.As you correctly found out yourself, you can install the helm addon chartmuseum/helm-push and use that to push Helm chart to Harbor
+- 2.You create the Helm Chart locally with helm package and upload the tgz file via the Harbor UI
+- Since version 3.8 Helm support pushing and pulling Charts from OCI compliant container registries such as Harbor.
+
+To be safe for the future, we recommend you switch to option 3, as Chartmuseum is already marked as deprecated in Harbor.
+
+Here is a quick rundown how to push/pull Helm Chart to OCI compliant Registries
 ```
 Before pulling or pushing Helm charts with the OCI-compatible registry of Harbor, Harbor should be logged with helm registry login command.
 
