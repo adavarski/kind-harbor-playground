@@ -1,10 +1,10 @@
-# ⚓ KinD Harbor : Deploy Harbor locally using KIND
+## ⚓ KinD Harbor : Deploy Harbor locally using KIND
 
-Harbor Architecture:
+### Harbor Architecture:
 
 <img src="pictures/Harbor-Architecture.png?raw=true" width="800">
 
-Installing KinD & Harbor on Kubernetes (KinD):
+### Installing KinD & Harbor on Kubernetes (KinD):
 
 ```bash
 $ make cluster
@@ -26,7 +26,7 @@ harbor-redis-0                              1/1     Running   0             11h
 harbor-registry-64b7c69575-c55zf            2/2     Running   0             11h
 harbor-trivy-0                              1/1     Running   0             11
 ```
-Open Browser https://core.harbor.domain and create `python` project:
+### Open Browser https://core.harbor.domain and create `python` project:
 
 <img src="pictures/harbor-create-project.png?raw=true" width="1000">
 
@@ -38,7 +38,7 @@ Download `python` project REGISTRY CERTIFICATE locally (ca.crt file):
 
 <img src="pictures/harbor-project-python-registry-certificate-download.png?raw=true" width="1000">
 
-Setup laptop docker daemon (docker host): 
+### Setup laptop docker daemon (docker host): 
 ```
 $ cat /etc/docker/daemon.json
 {
@@ -46,14 +46,14 @@ $ cat /etc/docker/daemon.json
 }
 $ sudo systemctl restart docker
 ```
-Create docker image and push to Harbor docker registry:
+### Create docker image and push to Harbor docker registry:
 ```
 $ cd python-docker-hello-kube
 $ docker build . -t core.harbor.domain/python/hello:1.0
 $ docker login core.harbor.domain (admin:Harbor12345)
 $ docker push core.harbor.domain/python/hello:1.0
 ```
-Setup KinD (ca.crt previously downloaded & /etc/hosts)
+### Setup KinD (ca.crt previously downloaded & /etc/hosts)
 ```
 $ docker ps -a
 CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                       NAMES
@@ -74,13 +74,16 @@ root@harbor-control-plane:/# echo "172.18.0.100 core.harbor.domain" >> /etc/host
 root@harbor-control-plane:/# systemctl restart containerd
 ```
 
+### Harbor Docker Private registry secret creation
+
 Note: To Pull the image from the private registry, first, we need the create a secret containing the private registry credential. Create a secret object with docker-registry type.
 
 ```
 $ kubectl create secret docker-registry harbor --docker-server=core.harbor.domain --docker-username=admin --docker-password=Harbor12345 --docker-email=root@testlab.local
 secret/harbor created
 ```
-Deploy python app:
+
+### Deploy python app:
 ```
 $ cat deployment.yml 
 
@@ -139,7 +142,7 @@ To delete deployment
 $ kubectl delete deployment hello-deployment
 ```
 
-Creating a helm chart for the hello-kube application
+### Creating a helm chart for the hello-kube application
 
 In this section we will create a basic helm chart for the hello-kube python application and deploy it in the kubernetes cluster.
 
@@ -298,7 +301,7 @@ The Helm documentation has a https://helm.sh/docs/topics/registries/
 ```
 
 
-Clean env:
+### Clean env:
 ```
 make cluster-delete
 ```
