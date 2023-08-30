@@ -133,7 +133,169 @@ $ kubectl get svc|grep hello
 hello-service                        LoadBalancer   10.96.95.92     172.18.0.101   5000:30182/TCP               64s
 $ curl 172.18.0.101:5000
 Hello, Kube!
+
+To delete deployment
+
+$ kubectl delete deployment hello-deployment
 ```
+
+Creating a helm chart for the hello-kube application
+
+In this section we will create a basic helm chart for the hello-kube python application and deploy it in the kubernetes cluster.
+
+```
+helm create hello-kube
+```
+This commnad will give the structure for the helm chart and create folder hello-kube. Since we are using a basic helm chart, We clean up the files and folderse in the hello-kube and make it in the below structure (helm-hello-kube folder in this repo)
+
+Now we will edit the deployment.yaml file in the templates folder inside hello-kube
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kube
+spec:
+  selector:
+    matchLabels:
+      app:  hello-kube
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app:  hello-kube
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+```
+ater we will edit the service.yaml file
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kube
+spec:
+  selector:
+    app: hello-kube
+  ports:
+  - protocol: "TCP"
+    port: {{ .Values.service.port }}
+    targetPort: http
+  type: {{ .Values.service.type }}
+```
+Now we will edit the values.yaml file and add our configurations for deployment which will be passed as variable to deployment.yaml and service.yaml files.
+
+```
+# Default values for hello-kube.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: core.harbor.domain/python/hello
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.0"
+
+imagePullSecrets: 
+  - name: harbor
+service:
+  type: LoadBalancer
+  port: 5000
+```
+now install the helm chart
+```
+$ helm install hello-kube hello-kube
+```
+To delete the deployment
+
+```
+$ helm delete hello-kube
+```
+
+Package the application as a helm chart and upload it to a harbor helm chart registry.
+
+```
+helm package hello-kube
+$ helm package hello-kube
+Successfully packaged chart and saved it to: /tmp/kind-harbor-playground/hello-kube-0.1.0.tgz
+
+```
+Push Helm Chart to OCI registry:
+```
+$ helm push --ca-file ./ca.crt hello-kube-0.1.0.tgz oci://core.harbor.domain/python/hello
+Pushed: core.harbor.domain/python/hello/hello-kube:0.1.0
+Digest: sha256:e92385cc2daff9a0299630a29bb28a2710b1a796a5d1849b00ab62f1aa78400c
+```
+Pull and Install Helm Chart from OCI registry:
+
+```
+$ helm pull --ca-file ../ca.crt oci://core.harbor.domain/python/hello/hello-kube --version 0.1.0
+Pulled: core.harbor.domain/python/hello/hello-kube:0.1.0
+Digest: sha256:e92385cc2daff9a0299630a29bb28a2710b1a796a5d1849b00ab62f1aa78400c
+$ ls
+hello-kube-0.1.0.tgz
+$ helm install hello-kube ./hello-kube-0.1.0.tgz 
+NAME: hello-kube
+LAST DEPLOYED: Wed Aug 30 07:51:38 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+$ kubectl get po|grep hell
+hello-kube-5bff9b5f57-mq6zr                 1/1     Running   0             40s$ kubectl get svc|grep hello-kube
+hello-kube                           LoadBalancer   10.96.82.244    172.18.0.102   5000:32373/TCP               93s
+$ curl 172.18.0.102:5000
+
+$ helm delete hello-kube
+release "hello-kube" uninstalled
+
+Note: This is pulling to tgz file to your current directory. Unlike with the common approach where you would first add a repo and the pull from it in order to be able to install a Chart you can do it all in one go with an OCI registry:
+
+$ helm install hello-kube --ca-file ./ca.crt oci://core.harbor.domain/python/hello/hello-kube --version 0.1.0
+Pulled: core.harbor.domain/python/hello/hello-kube:0.1.0
+Digest: sha256:e92385cc2daff9a0299630a29bb28a2710b1a796a5d1849b00ab62f1aa78400c
+NAME: hello-kube
+LAST DEPLOYED: Wed Aug 30 07:56:43 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+$ kubectl get po|grep hello
+hello-kube-5bff9b5f57-cq87w                 1/1     Running   0             30s
+$ helm list
+NAME         	NAMESPACE	REVISION	UPDATED                                 	STATUS  	CHART              	APP VERSION
+harbor       	default  	1       	2023-08-29 19:55:02.419566648 +0300 EEST	deployed	harbor-1.12.4      	2.8.4      
+hello-kube   	default  	1       	2023-08-30 07:56:43.829845076 +0300 EEST	deployed	hello-kube-0.1.0   	1.16.0     
+ingress-nginx	default  	1       	2023-08-29 19:54:07.507984748 +0300 EEST	deployed	ingress-nginx-4.7.1	1.8.1      
+metallb      	default  	1       	2023-08-29 19:53:05.309492749 +0300 EEST	deployed	metallb-0.13.10    	v0.13.10
+
+Same procedure for template and upgrade
+
+The oci:// protocol is also available in various other subcommands. Here is a complete list:
+
+helm pull
+helm show
+helm template
+helm install
+helm upgrade
+
+The Helm documentation has a https://helm.sh/docs/topics/registries/
+
+```
+
+
 Clean env:
 ```
 make cluster-delete
