@@ -149,7 +149,8 @@ In this section we will create a basic helm chart for the hello-kube python appl
 ```
 helm create hello-kube
 ```
-This commnad will give the structure for the helm chart and create folder hello-kube. Since we are using a basic helm chart, We clean up the files and folderse in the hello-kube and make it in the below structure (helm-hello-kube folder in this repo)
+This commnad will give the structure for the helm chart and create folder hello-kube. Since we are using a basic helm chart, 
+We clean up the files and folderse in the hello-kube and make it in the below structure (helm-hello-kube folder in this repo)
 
 Now we will edit the deployment.yaml file in the templates folder inside hello-kube
 ```
@@ -284,6 +285,7 @@ $ helm delete hello-kube
 release "hello-kube" uninstalled
 
 Note: This is pulling to tgz file to your current directory.
+
 Unlike with the common approach where you would first add a repo and the pull from it in order to be able to install a Chart
 you can do it all in one go with an OCI registry:
 
