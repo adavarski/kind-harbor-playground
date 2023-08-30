@@ -235,7 +235,7 @@ $ helm package hello-kube
 Successfully packaged chart and saved it to: /tmp/kind-harbor-playground/hello-kube-0.1.0.tgz
 
 ```
-Push Helm Chart to OCI registry:
+### Push Helm Chart to OCI registry:
 
 There are three options how helm charts can be pushed to Harbor
 
