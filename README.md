@@ -106,7 +106,7 @@ rehash: warning: skipping ca-certificates.crt,it does not contain exactly one ce
 Running hooks in /etc/ca-certificates/update.d...
 done.
 
-root@harbor-control-plane:/# echo "172.18.0.100 core.harbor.domain" >> /etc/hosts
+root@harbor-control-plane:/# echo "172.17.0.100 core.harbor.domain" >> /etc/hosts
 root@harbor-control-plane:/# systemctl restart containerd
 ```
 
