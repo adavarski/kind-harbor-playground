@@ -51,7 +51,7 @@ harbor-portal                        ClusterIP      10.96.117.83    <none>      
 harbor-redis                         ClusterIP      10.96.87.37     <none>         6379/TCP                     22m
 harbor-registry                      ClusterIP      10.96.233.65    <none>         5000/TCP,8080/TCP            22m
 harbor-trivy                         ClusterIP      10.96.180.83    <none>         8080/TCP                     22m
-ingress-nginx-controller             LoadBalancer   10.96.103.114   172.18.0.100   80:30070/TCP,443:30144/TCP   23m
+ingress-nginx-controller             LoadBalancer   10.96.103.114   172.17.0.100   80:30070/TCP,443:30144/TCP   23m
 ingress-nginx-controller-admission   ClusterIP      10.96.255.84    <none>         443/TCP                      23m
 kubernetes                           ClusterIP      10.96.0.1       <none>         443/TCP                      25m
 metallb-webhook-service              ClusterIP      10.96.232.90    <none>         443/TCP                      24m
