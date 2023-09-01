@@ -337,3 +337,5 @@ Ref:
 - https://github.com/jpb111/kubernetes-k0s-ansible-harbor
 - https://ruzickap.github.io/k8s-harbor/part-06/#add-project
 - https://goharbor.io/docs/1.10/working-with-projects/working-with-images/managing-helm-charts/
+
+[Credits](https://github.com/mmontes11/harbor-kind) 
