@@ -12,7 +12,7 @@ $ make cluster
 $ docker network inspect -f '{{.IPAM.Config}}' kind
 [{172.17.0.0/16  172.17.0.1 map[]} {fc00:f853:ccd:e793::/64  fc00:f853:ccd:e793::1 map[]}]
 
-Edit Makefile 
+Makefile:
 LB_IP ?= 172.17.0.100
 
 hack/config/lb-ipaddresspool.yaml:
