@@ -88,6 +88,8 @@ Check Trivy vulnarability scan (1 High):
 
 <img src="pictures/harbor-python-helo-scan-vulnaribilities.png?raw=true" width="1000">
 
+<img src="pictures/harbor-project-python-hello-trivy-SCAN-CVE-2023-30861.png?raw=true" width="1000">
+
 
 ### Setup KinD (ca.crt previously downloaded & /etc/hosts)
 ```
