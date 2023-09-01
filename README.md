@@ -20,7 +20,7 @@ spec:
   addresses:
     - 172.17.0.100-172.17.0.110
 /hack/config/nginx.yaml:
-metallb.universe.tf/loadBalancerIPs: 172.18.0.100
+metallb.universe.tf/loadBalancerIPs: 172.17.0.100
 
 $ make add-host
 Adding "core.harbor.domain" to /etc/hosts
