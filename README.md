@@ -25,6 +25,22 @@ harbor-portal-6d694b876b-vcbwj              1/1     Running   0             11h
 harbor-redis-0                              1/1     Running   0             11h
 harbor-registry-64b7c69575-c55zf            2/2     Running   0             11h
 harbor-trivy-0                              1/1     Running   0             11
+
+$ kubectl get svc
+NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
+harbor-core                          ClusterIP      10.96.130.210   <none>         80/TCP                       22m
+harbor-database                      ClusterIP      10.96.36.72     <none>         5432/TCP                     22m
+harbor-jobservice                    ClusterIP      10.96.55.117    <none>         80/TCP                       22m
+harbor-notary-server                 ClusterIP      10.96.173.193   <none>         4443/TCP                     22m
+harbor-notary-signer                 ClusterIP      10.96.247.58    <none>         7899/TCP                     22m
+harbor-portal                        ClusterIP      10.96.117.83    <none>         80/TCP                       22m
+harbor-redis                         ClusterIP      10.96.87.37     <none>         6379/TCP                     22m
+harbor-registry                      ClusterIP      10.96.233.65    <none>         5000/TCP,8080/TCP            22m
+harbor-trivy                         ClusterIP      10.96.180.83    <none>         8080/TCP                     22m
+ingress-nginx-controller             LoadBalancer   10.96.103.114   172.18.0.100   80:30070/TCP,443:30144/TCP   23m
+ingress-nginx-controller-admission   ClusterIP      10.96.255.84    <none>         443/TCP                      23m
+kubernetes                           ClusterIP      10.96.0.1       <none>         443/TCP                      25m
+metallb-webhook-service              ClusterIP      10.96.232.90    <none>         443/TCP                      24m
 ```
 ### Open Browser https://core.harbor.domain and create `python` project (admin:Harbor12345):
 
