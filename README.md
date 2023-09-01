@@ -1,4 +1,4 @@
-## ⚓ KinD Harbor : Deploy Harbor locally using KIND
+## ⚓ (WIP) KinD Harbor : Deploy Harbor locally using KIND
 
 ### Harbor Architecture:
 
