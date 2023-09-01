@@ -8,11 +8,25 @@
 
 ```bash
 $ make cluster
+
+$ docker network inspect -f '{{.IPAM.Config}}' kind
+[{172.17.0.0/16  172.17.0.1 map[]} {fc00:f853:ccd:e793::/64  fc00:f853:ccd:e793::1 map[]}]
+
+Edit Makefile 
+LB_IP ?= 172.17.0.100
+
+hack/config/lb-ipaddresspool.yaml:
+spec:
+  addresses:
+    - 172.17.0.100-172.17.0.110
+/hack/config/nginx.yaml:
+metallb.universe.tf/loadBalancerIPs: 172.18.0.100
+
 $ make add-host
 Adding "core.harbor.domain" to /etc/hosts
 $ cat /etc/hosts|tail -n2
 # harbor
-172.18.0.100	core.harbor.domain
+172.17.0.100	core.harbor.domain
 $ make install
 
 $ kubectl get po |grep harb
