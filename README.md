@@ -15,12 +15,12 @@ $ docker network inspect -f '{{.IPAM.Config}}' kind
 Makefile:
 LB_IP ?= 172.17.0.100
 
-hack/config/lb-ipaddresspool.yaml:
+./hack/config/lb-ipaddresspool.yaml:
 spec:
   addresses:
     - 172.17.0.100-172.17.0.110
 
-/hack/config/nginx.yaml:
+./hack/config/nginx.yaml:
 metallb.universe.tf/loadBalancerIPs: 172.17.0.100
 
 $ make add-host
