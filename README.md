@@ -316,7 +316,7 @@ REVISION: 1
 
 $ kubectl get po|grep hell
 hello-kube-5bff9b5f57-mq6zr                 1/1     Running   0             40s$ kubectl get svc|grep hello-kube
-hello-kube                           LoadBalancer   10.96.82.244    172.18.0.102   5000:32373/TCP               93s
+hello-kube                           LoadBalancer   10.96.82.244    172.17.0.102   5000:32373/TCP               93s
 $ curl 172.18.0.102:5000
 
 $ helm delete hello-kube
