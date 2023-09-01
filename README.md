@@ -26,7 +26,7 @@ harbor-redis-0                              1/1     Running   0             11h
 harbor-registry-64b7c69575-c55zf            2/2     Running   0             11h
 harbor-trivy-0                              1/1     Running   0             11
 ```
-### Open Browser https://core.harbor.domain and create `python` project:
+### Open Browser https://core.harbor.domain and create `python` project (admin:Harbor12345):
 
 <img src="pictures/harbor-create-project.png?raw=true" width="1000">
 
