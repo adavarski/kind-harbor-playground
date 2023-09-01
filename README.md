@@ -172,7 +172,7 @@ hello-deployment-5d479bfff5-lb7zp           1/1     Running   0             12s
 
 $ kubectl get svc|grep hello
 hello-service                        LoadBalancer   10.96.95.92     172.17.0.101   5000:30182/TCP               64s
-$ curl 172.18.0.101:5000
+$ curl 172.17.0.101:5000
 Hello, Kube!
 
 To delete deployment
