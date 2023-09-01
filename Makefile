@@ -34,7 +34,7 @@ cluster-ctx: ## Sets cluster context.
 
 ##@ Networking
 
-LB_IP ?= 172.18.0.100
+LB_IP ?= 172.17.0.100
 HARBOR_HOST ?= core.harbor.domain
 .PHONY: add-host
 add-host: ## Add harbor host to /etc/hosts.
