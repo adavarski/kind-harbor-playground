@@ -1,5 +1,10 @@
 ## ⚓ KinD Harbor : Deploy Harbor locally using KIND
 
+### Requirenments
+- Linux laptop/workstation
+- Docker installed
+- Go installed
+
 ### Harbor Architecture:
 
 <img src="pictures/Harbor-Architecture.png?raw=true" width="800">
